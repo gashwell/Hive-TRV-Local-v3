@@ -243,3 +243,110 @@ HIVE_ATTR_WINDOW_OPEN      = "window_open_external"
 HIVE_ATTR_HEAT_REQUIRED    = "heat_required"
 HIVE_ATTR_PI_DEMAND        = "pi_heating_demand"
 HIVE_ATTR_ADAPTATION_RUN   = "adaptation_run_control"
+
+
+# ── StrEnum classes (required by config_flow, climate, sync_mode etc.) ────────
+from enum import StrEnum
+
+
+class HvacModeStrategy(StrEnum):
+    """HVAC mode aggregation strategy."""
+    AUTO         = "auto"
+    NORMAL       = "normal"
+    OFF_PRIORITY = "off_priority"
+
+
+class FeatureStrategy(StrEnum):
+    """Feature aggregation strategy."""
+    INTERSECTION = "intersection"
+    UNION        = "union"
+
+
+class UnionOutOfBoundsAction(StrEnum):
+    """Out-of-bounds action when union strategy is active."""
+    OFF   = "off"
+    CLAMP = "clamp"
+
+
+class UnsupportedHvacAction(StrEnum):
+    """How to handle members that do not support the active HVAC mode."""
+    IGNORE = "ignore"
+    OFF    = "off"
+
+
+class AverageOption(StrEnum):
+    """Averaging options for temperature."""
+    MEAN   = "mean"
+    MEDIAN = "median"
+    MIN    = "min"
+    MAX    = "max"
+
+
+class RoundOption(StrEnum):
+    """Rounding options for temperature."""
+    NONE    = "none"
+    HALF    = "half"
+    INTEGER = "integer"
+
+
+class CalibrationMode(StrEnum):
+    """Calibration modes for external sensors."""
+    ABSOLUTE = "absolute"
+    OFFSET   = "offset"
+    SCALED   = "scaled"
+
+
+class SyncMode(StrEnum):
+    """Sync mode options."""
+    DISABLED    = "disabled"
+    LOCK        = "lock"
+    MIRROR      = "mirror"
+    MASTER_LOCK = "master_lock"
+    MIRROR_LOCK = "mirror_lock"
+
+
+class WindowControlMode(StrEnum):
+    """Window control enable/disable."""
+    DISABLED = "disabled"
+    ENABLED  = "enabled"
+
+
+class AdoptManualChanges(StrEnum):
+    """Adopt manual changes options for window control."""
+    OFF         = "off"
+    ALL         = "all"
+    MASTER_ONLY = "master_only"
+
+
+class WindowControlAction(StrEnum):
+    """Window control actions."""
+    OFF         = "off"
+    TEMPERATURE = "temperature"
+
+
+class RangeTemplateDeadbandAction(StrEnum):
+    """Physical action when a range-template member is inside the deadband."""
+    OFF      = "off"
+    FAN_ONLY = "fan_only"
+
+
+class PresenceMode(StrEnum):
+    """Presence control modes."""
+    DISABLED = "disabled"
+    ENABLED  = "enabled"
+
+
+class PresenceAction(StrEnum):
+    """Presence control actions."""
+    OFF              = "off"
+    AWAY_OFFSET      = "away_offset"
+    AWAY_TEMPERATURE = "away_temperature"
+    AWAY_PRESET      = "away_preset"
+
+
+class IsolationTrigger(StrEnum):
+    """Isolation trigger modes."""
+    DISABLED  = "disabled"
+    SENSOR    = "sensor"
+    HVAC_MODE = "hvac_mode"
+    MEMBER_OFF = "member_off"
